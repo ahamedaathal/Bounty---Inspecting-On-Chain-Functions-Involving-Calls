@@ -66,13 +66,3 @@ This digest is then used to verify the signature and, upon successful verificati
 
 - **Impact**:
   The use of abi.encodePacked in the permit function allows for efficient encoding of multiple parameters into a single hash, which is essential for the EIP-2612 permit functionality. This method contributes significantly to the contract's functionality by enabling gasless approvals, improving user experience, and maintaining security through cryptographic signatures. This feature is particularly impactful in DeFi protocols, where frequent interactions with ERC-20 tokens are common, and reducing the number of required on-chain transactions can lead to significant cost savings and enhanced usability.
-
-Here's the critical part of the function where abi.encodePacked is used:
-
-bytes32 digest = keccak256(
-abi.encodePacked(
-'\x19\x01',
-DOMAIN_SEPARATOR,
-keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))
-)
-);
